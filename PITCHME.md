@@ -121,15 +121,15 @@ fun initShader(shader: Int, source: String) {
 @[2-13, zoom-13]
 @[14]
 @[15, zoom-13]
-@[17-27]
-@[18, zoom-12]
-@[19, zoom-12]
+@[19-27]
 @[20, zoom-12]
 @[21, zoom-12]
 @[22, zoom-12]
 @[23, zoom-12]
 @[24, zoom-12]
 @[25, zoom-12]
+@[26, zoom-12]
+@[27, zoom-12]
 @[15, zoom-12]
 
 ---
