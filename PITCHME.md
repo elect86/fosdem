@@ -2,35 +2,26 @@
 ![OPENGL](assets/img/opengl_logo.png)
 @snapend
 
-@ul[list-spaced-bullets text-09]
-- cross-language and platform API for rendering
-- IHV write the implementations (drivers)
-@ulend
-
----
-
-### History
-
-@ul[list-spaced-bullets text-08]
+@snap[south]
+@ul[list-spaced-bullets text-07]
 - developed by SGI in 1991
-- first release (1.0) in 1992
 - last release by SGI in July 2006 (2.1)
 - first big release by Khronos in August 2008 (3.0)
-- March 2010, 4.0
 - July 2010, 4.1 (last available on MacOS)
 - last release, 4.6, on July 2017
 @ulend
+@snapend
 
 
 ---?image=assets/img/glPipeline.png&size=auto 50%
 
 @snap[north span-40]
-### Pipeline
+#### OpenGL Pipeline
 @snapend
 
 ---
 
-## Welcome GLN
+### Welcome *GLN*
 
 - object oriented
 - DSL
@@ -67,6 +58,7 @@ fun initProgram() {
 	GL20C.glAttachShader(program, vertex)
 	GL20C.glAttachShader(program, fragment)
 	GL20C.glBindAttribLocation(program, semantic.attr.POSITION, "Position")
+	GL20C.glBindAttribLocation(program, semantic.attr.COLOR, "Color")
 	GL20C.glLinkProgram(program)
 	val linkStatus = GL20C.glGetProgrami(program, GL20C.GL_LINK_STATUS) // Int
 	if(linkStatus ++ GL20C.GL_FALSE) {
@@ -125,12 +117,12 @@ fun initShader(shader: Int, source: String) {
 @[20, zoom-12]
 @[21, zoom-12]
 @[22, zoom-12]
-@[23, zoom-12]
+@[23,27, zoom-12]
 @[24, zoom-12]
 @[25, zoom-12]
 @[26, zoom-12]
-@[27, zoom-12]
 @[15, zoom-12]
+@[16, zoom-12]
 
 ---
 
@@ -168,7 +160,7 @@ fun initVertexShader(): GlShader {
 @[3,21, zoom-12]
 @[4,8-9,21-22,26, zoom-12]
 @[10,21,23,26, zoom-12]
-@[11-12,21,24,26, zoom-12]
+@[11-12,16,21,24,26, zoom-12]
 @[13-15,21,25,26, zoom-12]
 
 ---
@@ -215,7 +207,7 @@ Both!
 
 ---
 
-```kotlin
+```kotlin 
 inline class ShaderType(val i: Int) {
     companion object {
         val COMPUTE_SHADER = ShaderType(GL43.GL_COMPUTE_SHADER)
@@ -238,6 +230,7 @@ fun initProgram() {
 	GL20C.glAttachShader(program, vertex)
 	GL20C.glAttachShader(program, fragment)
 	GL20C.glBindAttribLocation(program, semantic.attr.POSITION, "Position")
+	GL20C.glBindAttribLocation(program, semantic.attr.COLOR, "COLOR")
 	GL20C.glLinkProgram(program)
 	...
 }
@@ -249,6 +242,7 @@ fun initProgram() {
 		this += vertex
 		this += fragment
 		"Position".attrib = semantic.attr.POSITION
+		"Color".attrib = semantic.attr.COLOR
 		link()
 		if(!linkStatus) 
 			throw Exception("program link status false: $infoLog")
@@ -263,16 +257,16 @@ fun initProgram() {
 @[1-10]
 @[4, zoom-13]
 @[5-6, zoom-13]
-@[7]
-@[8, zoom-13]
-@[9]
-@[1,12]
-@[2,13,26]
-@[3-4,13-15,26]
-@[5-6,13,16-17,26]
-@[7,13,18,26]
-@[8,13,19,26]
-@[9]
+@[7-8]
+@[9, zoom-13]
+@[10]
+@[1,13]
+@[2,14,28]
+@[3-4,14-16,28]
+@[5-6,14,17-18,28]
+@[7,8,14,19-20,28]
+@[9,14,21,28]
+@[10]
 
 ---
 
@@ -298,6 +292,7 @@ fun initProgram() {
 		this += vertex
 		this += fragment
 		"Position".attrib = semantic.attr.POSITION
+		"Color".attrib = semantic.attr.COLOR
 		link()
 		if(!linkStatus) 
 			throw Exception("program link status false: $infoLog")
@@ -310,10 +305,10 @@ fun initProgram() {
 ```
 
 @[2]
-@[3-4, 23]
-@[5-7, 24]
-@[9-10, 25-26]
-@[11-12, 27-28]
+@[3-4, 24]
+@[5-7, 25]
+@[9-10, 26-27]
+@[11-12, 28-29]
 
 ---
 
@@ -459,14 +454,16 @@ fun initVertexArray(): Boolean {
 ---
 
 ```kotlin zoom-08
+val windowSize: Vec2i ..
+
 fun render(): Boolean {
 
-	val projection = glm.perspective(glm.πf * 0.25f, window.aspect, 0.1f, 100f)
+	val projection = glm.perspective(glm.πf * 0.25f, windowSize.aspect, 0.1f, 100f)
 	val model = Mat4(1f)
 	val view = Mat4(1f).translate(0f, 0f, -4f)
 	val mvp = projection * view * model
 
-	glViewport(0, 0, 800, 600)
+	glViewport(0, 0, 800, 600) // glViewport(windowSize)
 
 	glClearColor(0f, 0f, 0f, 1f)
 	glClearDepthf(1f)
@@ -478,20 +475,22 @@ fun render(): Boolean {
 }
 ```
 
-@[3]
-@[4]
+@[1]
+@[3,19]
 @[5]
 @[6]
+@[7]
 @[8]
 @[10]
-@[11]
 @[12]
+@[13]
 @[14]
+@[16]
 
 ---
 
 
-```kotlin zoom-08
+```kotlin zoom-08 code-reveal-fast
 fun render(): Boolean {
 	...	
 	GL20C.glUseProgram(program)
@@ -519,8 +518,17 @@ fun render(): Boolean {
 }
 ```
 
-@[2, 16]
-@[3,10, 17,22]
+@[1-13]
+@[2]
+@[3]
+@[4-6]
+@[7]
+@[8]
+@[7,9]
+@[3,10]
+@[12]
+@[1-2,15-16]
+@[3,10,17,22]
 @[4-6, 18]
 @[7,9, 19,21]
 @[8, 20]
@@ -656,9 +664,9 @@ fun createInstance(enableValidation: Boolean): Int { // VkResult
 @[1,4-6, 19]
 @[1,7-9, 19]
 @[1,10-12, 19]
-@[1,13, 19]
+@[1,13,17,19]
 @[1,14-16,19]
-@[1,17-18]
+@[1,13,17-19]
 @[20-21]
 @[22]
 @[23]
