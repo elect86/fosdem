@@ -91,10 +91,13 @@ fun initVertexShader(): Int {
 	val source = """
 		#version 300 es
 		uniform mat4 MVP;
-		in vec4 Position; // layout (location = ${semantic.attr.POSITION}
+		in vec2 Position; // layout (location = ${semantic.attr.POSITION}
+		in vec3 Color;
+		out vec3 c;
 		void main()
 		{	
 			gl_Position = MVP * Position;
+			c = Color;
 		}
 	"""
 	val vertex = GL20C.glCreateShader(GL20C.GL_VERTEX_SHADER)
