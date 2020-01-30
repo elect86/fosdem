@@ -117,10 +117,10 @@ fun initShader(shader: Int, source: String) {
 }
 ```
 
-@[1-16]
-@[2-12, zoom-13]
-@[13]
-@[14, zoom-13]
+@[1-17]
+@[2-13, zoom-13]
+@[14]
+@[15, zoom-13]
 @[17-27]
 @[18, zoom-12]
 @[19, zoom-12]
