@@ -1,3 +1,9 @@
+15/28
+
+program.apply
+
+buffer.VERTEX
+
 @snap[north span-40]
 ![OPENGL](assets/img/opengl_logo.png)
 @snapend
@@ -10,6 +16,13 @@
 - July 2010, 4.1 (last available on MacOS)
 - last release, 4.6, on July 2017
 @ulend
+@snapend
+
+
+---?image=assets/img/glPipeline.png&size=auto 50%
+
+@snap[north span-40]
+#### OpenGL Pipeline
 @snapend
 
 ---
@@ -317,7 +330,6 @@ fun initProgram() {
 fun initProgram() {
 	val program = GlProgram.initFromPath(SHADER_SOURCE) { // this: ProgramBase
 		"Position".attrib = semantic.attr.POSITION
-		"Color".attrib = semantic.attr.COLOR
 	}
 }
 ```
