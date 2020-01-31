@@ -324,6 +324,7 @@ fun initProgram() {
 fun initProgram() {
 	val program = GlProgram.initFromPath(SHADER_SOURCE) { // this: ProgramBase
 		"Position".attrib = semantic.attr.POSITION
+		"Color".attrib = semantic.attr.COLOR
 	}
 }
 ```
