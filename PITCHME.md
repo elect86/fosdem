@@ -12,13 +12,6 @@
 @ulend
 @snapend
 
-
----?image=assets/img/glPipeline.png&size=auto 50%
-
-@snap[north span-40]
-#### OpenGL Pipeline
-@snapend
-
 ---
 
 ### Welcome *GLN*
