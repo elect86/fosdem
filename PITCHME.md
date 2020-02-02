@@ -742,10 +742,87 @@ fun createInstance(enableValidation: Boolean): VkResult { // inline class
 
 ---
 
-what about VkResult?
+Where is the expected VkResult?
 
 ---
 
-what about VkResult?
+```kotlin 
+instance = Instance(instanceCreateInfo) { res ->
+    return res
+}
+```
 
-and the stack?
+---
+
+What happened to the stack?
+
+---
+
+```kotlin
+fun createInstance(enableValidation: Boolean): VkResult { // inline class
+	// no stack, no pStrings
+	val appInfo = ApplicationInfo("Hello Triangle", "My Engine", 1) // all jvm, no stype
+	val instanceExtensions = glfw.requiredInstanceExtensions // one unique ArrayList<String>
+	if (instanceExtensions.isEmpty()) // avoid nullability
+		throw IllegalStateException("failed to find the platform surface extensions.")
+
+	val instanceCreateInfo = InstanceCreateInfo(applicationInfo = appInfo)
+		
+	if (instanceExtensions.isNotEmpty()) {
+		if (settings.validation) 
+			instanceExtensions += "VK_EXT_debug_utils"
+		instanceCreateInfo.enabledExtensionNames = instanceExtensions
+	}	
+	if (settings.validation) {
+		// The VK_LAYER_KHRONOS_validation contains all current validation functionality.
+		val validationLayerName = "VK_LAYER_KHRONOS_validation"
+		// Check if this layer is available at instance level
+		val instanceLayerProperties = vk.enumerateInstanceLayerProperties // Array<LayerProperties>
+		val validationLayerPresent = instanceLayerProperties.any { 
+			it.layerName == validationLayerName // direct field
+		} // Boolean
+		if (validationLayerPresent)
+			instanceCreateInfo.enabledLayerNames = validationLayerName
+		else 
+			System.err.println("VK_LAYER_KHRONOS_validation not present, validation is disabled")
+	}
+	instance = Instance(instanceCreateInfo) // no &, direct instantiation, no alloc
+}
+```
+
+@[19,28]
+@[1-29]
+
+---
+
+```kotlin
+fun MemoryStack.createInstance(enableValidation: Boolean): VkResult { // inline class
+	// no stack, no pStrings
+	val appInfo = ApplicationInfo("Hello Triangle", "My Engine", 1) // all jvm, no stype
+	val instanceExtensions = glfw.requiredInstanceExtensions // one unique ArrayList<String>
+	if (instanceExtensions.isEmpty()) // avoid nullability
+		throw IllegalStateException("failed to find the platform surface extensions.")
+
+	val instanceCreateInfo = InstanceCreateInfo(applicationInfo = appInfo)
+		
+	if (instanceExtensions.isNotEmpty()) {
+		if (settings.validation) 
+			instanceExtensions += "VK_EXT_debug_utils"
+		instanceCreateInfo.enabledExtensionNames = instanceExtensions
+	}	
+	if (settings.validation) {
+		// The VK_LAYER_KHRONOS_validation contains all current validation functionality.
+		val validationLayerName = "VK_LAYER_KHRONOS_validation"
+		// Check if this layer is available at instance level
+		val instanceLayerProperties = vk.enumerateInstanceLayerProperties // Array<LayerProperties>
+		val validationLayerPresent = instanceLayerProperties.any { 
+			it.layerName == validationLayerName // direct field
+		} // Boolean
+		if (validationLayerPresent)
+			instanceCreateInfo.enabledLayerNames = validationLayerName
+		else 
+			System.err.println("VK_LAYER_KHRONOS_validation not present, validation is disabled")
+	}
+	instance = Instance(instanceCreateInfo) // no &, direct instantiation, no alloc
+}
+```
