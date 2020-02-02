@@ -579,7 +579,7 @@ bufferImmutability = buffer.immutableStorage
 
 @ul[list-spaced-bullets text-09]
 - cross-platform rendering/computing API
-- really low-overhead
+- low-overhead
 - built upon Mantle
 - released on February 2016
 - latest release on January 2020 (1.2)
