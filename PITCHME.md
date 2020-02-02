@@ -455,7 +455,7 @@ fun render(): Boolean {
 	val view = Mat4(1f).translate(0f, 0f, -4f)
 	val mvp = projection * view * model
 
-	glViewport(0, 0, 800, 600) // glViewport(windowSize)
+	glViewport(windowSize) // aka glViewport(0, 0, 800, 600)
 
 	glClearColor(0f, 0f, 0f, 1f)
 	glClearDepthf(1f)
