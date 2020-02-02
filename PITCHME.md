@@ -246,12 +246,6 @@ fun initProgram() {
 		"Position".attrib = semantic.attr.POSITION
 		"Color".attrib = semantic.attr.COLOR
 		link()
-		if(!linkStatus) 
-			throw Exception("program link status false: $infoLog")
-		this -= vertex
-		this -= fragment
-		vertex.delete()
-		fragment.delete()
 	}
 }
 ```
@@ -264,10 +258,10 @@ fun initProgram() {
 @[10]
 @[1,13]
 @[2,14,28]
-@[3-4,14-16,28]
-@[5-6,14,17-18,28]
-@[7,8,14,19-20,28]
-@[9,14,21,28]
+@[3-4,14-16,22]
+@[5-6,14,17-18,22]
+@[7,8,14,19-20,22]
+@[9,14,21,22]
 @[10]
 
 ---
