@@ -596,6 +596,8 @@ bufferImmutability = buffer.immutableStorage
 - convenience overloading ("low") functions
 - glm interoperability
 
+---
+
 ```kotlin	zoom-07
 fun createInstance(enableValidation: Boolean): Int { // VkResult
 	val stack = MemoryStack.stackPush()	// MemoryStack
