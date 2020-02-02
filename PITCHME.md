@@ -556,7 +556,26 @@ fun end(): Boolean {
 
 ---
 
-#DSA?
+### DSA?
+
+```kotlin code-reveal-fast
+glBindBuffer(GL_ARRAY_BUFFER, buffer)
+bufferImmutability = glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_IMMUTABLE_STORAGE) // Int
+glBindBuffer(GL_ARRAY_BUFFER, 0)
+
+// DSA
+bufferImmutability = glGetNamedBufferParameteriv(buffer, GL_BUFFER_IMMUTABLE_STORAGE)
+
+buffer.bound(ARRAY) {
+    bufferImmutability = immutableStorage // Boolean
+}
+
+// DSA
+bufferImmutability = buffer.immutableStorage
+```
+
+@[6]
+@[8-13]
 
 ---
 
