@@ -340,7 +340,7 @@ fun main() {
 
 ---
 
-```kotlin code-reveal-fast zoom-07
+```kotlin code-reveal-fast zoom-06
 fun initBuffer(): Boolean {
 
 	GL15C.glGenBuffers(buffers)
