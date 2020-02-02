@@ -149,7 +149,7 @@ fun initShader(shader: Int, source: String) {
 
 fun initVertexShader(): GlShader {
 	val source = ...
-	return GlShader.create(VERTEX_SHADER).apply { // this: GlShader
+	return GlShader.create(VERTEX_SHADER).with { // this: GlShader
 		source(source)
 		compile()
 		if(!compileStatus) 
