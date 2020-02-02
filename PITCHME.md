@@ -556,7 +556,7 @@ fun end(): Boolean {
 
 ---
 
-### DSA?
+### DSA
 
 ```kotlin code-reveal-fast
 glBindBuffer(GL_ARRAY_BUFFER, buffer)
@@ -574,7 +574,7 @@ buffer.bound(ARRAY) {
 bufferImmutability = buffer.immutableStorage
 ```
 
-@[6]
+@[1-6]
 @[8-13]
 
 ---
