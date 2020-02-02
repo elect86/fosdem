@@ -820,3 +820,9 @@ fun MemoryStack.createInstance(enableValidation: Boolean): VkResult {
 	instance = Instance(instanceCreateInfo)
 }
 ```
+
+---
+
+github.com/kotlin-graphics
+
+---
