@@ -552,7 +552,7 @@ fun end(): Boolean {
 
 ### DSA
 
-```kotlin code-reveal-fast zoom-08
+```kotlin code-reveal-fast zoom-07
 glBindBuffer(GL_ARRAY_BUFFER, buffer)
 bufferImmutability = glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_IMMUTABLE_STORAGE) // Int
 glBindBuffer(GL_ARRAY_BUFFER, 0)
