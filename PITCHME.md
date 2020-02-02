@@ -209,7 +209,7 @@ Both!
 
 ---
 
-```kotlin 
+```kotlin zoom-08
 inline class ShaderType(val i: Int) {
     companion object {
         val COMPUTE_SHADER = ShaderType(GL43.GL_COMPUTE_SHADER)
