@@ -1,9 +1,3 @@
-15/28
-
-program.apply
-
-buffer.VERTEX
-
 @snap[north span-40]
 ![OPENGL](assets/img/opengl_logo.png)
 @snapend
@@ -558,7 +552,7 @@ fun end(): Boolean {
 
 ### DSA
 
-```kotlin code-reveal-fast
+```kotlin code-reveal-fast zoom-08
 glBindBuffer(GL_ARRAY_BUFFER, buffer)
 bufferImmutability = glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_IMMUTABLE_STORAGE) // Int
 glBindBuffer(GL_ARRAY_BUFFER, 0)
