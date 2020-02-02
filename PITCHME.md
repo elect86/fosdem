@@ -283,13 +283,7 @@ fun initProgram() {
 
 fun initProgram() {
     program = GlProgram.create().apply { // this: GlProgram
-		val vertex = createVertexShader() // GlShader
-		val fragment = createFragmentShader() // GlShader
-		this += vertex
-		this += fragment
-		"Position".attrib = semantic.attr.POSITION
-		"Color".attrib = semantic.attr.COLOR
-		link()
+                ...
 		if(!linkStatus) 
 			throw Exception("program link status false: $infoLog")
 		this -= vertex
@@ -300,11 +294,11 @@ fun initProgram() {
 }
 ```
 
-@[2]
-@[3-4, 24]
-@[5-7, 25]
-@[9-10, 26-27]
-@[11-12, 28-29]
+@[2,17]
+@[3-4, 18]
+@[5-7, 19]
+@[9-10, 20-21]
+@[11-12, 22-23]
 
 ---
 
