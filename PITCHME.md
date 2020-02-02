@@ -758,7 +758,7 @@ What happened to the stack?
 
 ---
 
-```kotlin zoom-07
+```kotlin zoom-06
 fun createInstance(enableValidation: Boolean): VkResult { // inline class
 	// no stack, no pStrings
 	val appInfo = ApplicationInfo("Hello Triangle", "My Engine", 1) // all jvm, no stype
@@ -795,7 +795,7 @@ fun createInstance(enableValidation: Boolean): VkResult { // inline class
 
 ---
 
-```kotlin zoom-07
+```kotlin zoom-06
 fun MemoryStack.createInstance(enableValidation: Boolean): VkResult { // inline class
 	// no stack, no pStrings
 	val appInfo = ApplicationInfo("Hello Triangle", "My Engine", 1) // all jvm, no stype
