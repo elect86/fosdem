@@ -482,7 +482,7 @@ fun render(): Boolean {
 ---
 
 
-```kotlin zoom-08 code-reveal-fast
+```kotlin zoom-07 code-reveal-fast
 fun render(): Boolean {
 	...	
 	GL20C.glUseProgram(program)
