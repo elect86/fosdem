@@ -18,21 +18,17 @@ buffer.VERTEX
 @ulend
 @snapend
 
-
----?image=assets/img/glPipeline.png&size=auto 50%
-
-@snap[north span-40]
-#### OpenGL Pipeline
-@snapend
-
 ---
 
 ### Welcome *GLN*
 
+- inline classes (and "enums")
+- inline functions
 - object oriented
 - DSL
 - functional programming
-- type-safe
+- convenience overloading functions
+- glm interoperability
 
 ---
 
@@ -132,7 +128,7 @@ fun initShader(shader: Int, source: String) {
 
 ---
 
-```kotlin code-reveal-fast zoom-07
+```kotlin code-reveal-fast zoom-06
 fun initVertexShader(): Int {
 	val source = ...
 	val vertex = GL20C.glCreateShader(GL20C.GL_VERTEX_SHADER)
@@ -587,6 +583,15 @@ fun end(): Boolean {
 @ulend
 
 ---
+
+### Welcome *VK²*
+
+- inline classes (and "enums")
+- inline functions
+- object oriented
+- functional programming
+- convenience overloading ("low") functions
+- glm interoperability
 
 ```kotlin	zoom-07
 fun createInstance(enableValidation: Boolean): Int { // VkResult
