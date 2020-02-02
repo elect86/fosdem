@@ -760,10 +760,9 @@ What happened to the stack?
 
 ```kotlin zoom-05
 fun createInstance(enableValidation: Boolean): VkResult { // inline class
-	// no stack, no pStrings
-	val appInfo = ApplicationInfo("Hello Triangle", "My Engine", 1) // all jvm, no stype
-	val instanceExtensions = glfw.requiredInstanceExtensions // one unique ArrayList<String>
-	if (instanceExtensions.isEmpty()) // avoid nullability
+	val appInfo = ApplicationInfo("Hello Triangle", "My Engine", 1)
+	val instanceExtensions = glfw.requiredInstanceExtensions
+	if (instanceExtensions.isEmpty())
 		throw IllegalStateException("failed to find the platform surface extensions.")
 
 	val instanceCreateInfo = InstanceCreateInfo(applicationInfo = appInfo)
@@ -774,9 +773,7 @@ fun createInstance(enableValidation: Boolean): VkResult { // inline class
 		instanceCreateInfo.enabledExtensionNames = instanceExtensions
 	}	
 	if (settings.validation) {
-		// The VK_LAYER_KHRONOS_validation contains all current validation functionality.
 		val validationLayerName = "VK_LAYER_KHRONOS_validation"
-		// Check if this layer is available at instance level
 		val instanceLayerProperties = vk.enumerateInstanceLayerProperties // Array<LayerProperties>
 		val validationLayerPresent = instanceLayerProperties.any { 
 			it.layerName == validationLayerName // direct field
@@ -786,7 +783,7 @@ fun createInstance(enableValidation: Boolean): VkResult { // inline class
 		else 
 			System.err.println("VK_LAYER_KHRONOS_validation not present, validation is disabled")
 	}
-	instance = Instance(instanceCreateInfo) // no &, direct instantiation, no alloc
+	instance = Instance(instanceCreateInfo)
 }
 ```
 
