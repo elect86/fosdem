@@ -390,7 +390,7 @@ fun initBuffer(): Boolean {
 
 ---
 
-```kotlin zoom-07
+```kotlin zoom-06
 fun initVertexArray(): Boolean {
 	vertexArray = GL30C.glGenVertexArrays()	
 	GL30C.glBindVertexArray(vertexArray)	
