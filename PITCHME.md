@@ -759,7 +759,7 @@ What happened to the stack?
 ---
 
 ```kotlin zoom-05
-fun createInstance(enableValidation: Boolean): VkResult { // inline class
+fun createInstance(enableValidation: Boolean): VkResult {
 	val appInfo = ApplicationInfo("Hello Triangle", "My Engine", 1)
 	val instanceExtensions = glfw.requiredInstanceExtensions
 	if (instanceExtensions.isEmpty())
@@ -787,17 +787,16 @@ fun createInstance(enableValidation: Boolean): VkResult { // inline class
 }
 ```
 
-@[19,28]
-@[1-29]
+@[16,25]
+@[1-26]
 
 ---
 
 ```kotlin zoom-05
-fun MemoryStack.createInstance(enableValidation: Boolean): VkResult { // inline class
-	// no stack, no pStrings
-	val appInfo = ApplicationInfo("Hello Triangle", "My Engine", 1) // all jvm, no stype
-	val instanceExtensions = glfw.requiredInstanceExtensions // one unique ArrayList<String>
-	if (instanceExtensions.isEmpty()) // avoid nullability
+fun MemoryStack.createInstance(enableValidation: Boolean): VkResult {
+	val appInfo = ApplicationInfo("Hello Triangle", "My Engine", 1)
+	val instanceExtensions = glfw.requiredInstanceExtensions
+	if (instanceExtensions.isEmpty())
 		throw IllegalStateException("failed to find the platform surface extensions.")
 
 	val instanceCreateInfo = InstanceCreateInfo(applicationInfo = appInfo)
@@ -808,9 +807,7 @@ fun MemoryStack.createInstance(enableValidation: Boolean): VkResult { // inline 
 		instanceCreateInfo.enabledExtensionNames = instanceExtensions
 	}	
 	if (settings.validation) {
-		// The VK_LAYER_KHRONOS_validation contains all current validation functionality.
 		val validationLayerName = "VK_LAYER_KHRONOS_validation"
-		// Check if this layer is available at instance level
 		val instanceLayerProperties = vk.enumerateInstanceLayerProperties // Array<LayerProperties>
 		val validationLayerPresent = instanceLayerProperties.any { 
 			it.layerName == validationLayerName // direct field
@@ -820,6 +817,6 @@ fun MemoryStack.createInstance(enableValidation: Boolean): VkResult { // inline 
 		else 
 			System.err.println("VK_LAYER_KHRONOS_validation not present, validation is disabled")
 	}
-	instance = Instance(instanceCreateInfo) // no &, direct instantiation, no alloc
+	instance = Instance(instanceCreateInfo)
 }
 ```
